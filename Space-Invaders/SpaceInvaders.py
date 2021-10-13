@@ -3,8 +3,8 @@ pygame.init()
 
 w, h = (650, 650)
 s = pygame.display.set_mode((w, h))
-pygame.display.set_caption("Space Invaders")
-logo = pygame.image.load("Sprites/logo.png")
+pygame.display.set_caption("Space-Invaders")
+logo = pygame.image.load("logo.png")
 pygame.display.set_icon(logo)
 
 times = 0
@@ -15,7 +15,7 @@ move_left = False
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        self.sprite = pygame.image.load("Sprites/spaceship.png")
+        self.sprite = pygame.image.load("spaceship.png")
         pygame.transform.scale(self.sprite, (1, 1))
         self.rect = self.sprite.get_rect()
         print(times)
@@ -31,7 +31,7 @@ class Player(pygame.sprite.Sprite):
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super(Enemy, self).__init__()
-        self.sprite = pygame.image.load("Sprites/enemy.png")
+        self.sprite = pygame.image.load("enemy.png")
         pygame.transform.scale(self.sprite, (10, 10))
         self.rect = self.sprite.get_rect()
         self.line_1 = [
