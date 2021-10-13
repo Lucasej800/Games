@@ -26,6 +26,15 @@ class Player(pygame.sprite.Sprite):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 self.rect.move_ip(50, 0)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                self.rect.move_ip(-50, 0)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                self.rect.move_ip(0, -50)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_DOWN:
+                self.rect.move_ip(0, 50)
 
 
 class Enemy(pygame.sprite.Sprite):
@@ -136,7 +145,6 @@ enemy.rect.y = 0
 
 c = pygame.time.Clock()
 while True:
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
             quit()
@@ -161,4 +169,5 @@ while True:
     enemy.spawn()
     enemy.right_move()
     enemy.left_move()
+    player.move()
     pygame.display.flip()

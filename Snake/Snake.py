@@ -2,18 +2,18 @@ import pygame
 import random
 pygame.init()
 
-SPEED = 7
+SPEED = 6
 
 class Block(pygame.sprite.Sprite):
     def __init__(self):
         super(Block, self).__init__()
         self.direction = "right"
-        self.size = 10
+        self.size = 20
         self.surf = pygame.Surface((self.size, self.size))
         self.surf.fill((255, 255, 255))
-        self.snake = [100, 50]
+        self.snake = [100, 60]
         self.body = [
-            [90, 50],
+            [100, 60],
             self.snake,
         ]
 
@@ -22,31 +22,31 @@ class Block(pygame.sprite.Sprite):
         s.fill((0, 0, 0))
         for pos in self.body:
             self.rect = pygame.draw.rect(s, (255, 255, 255), pygame.Rect(
-                pos[0], pos[1], 10, 10))
+                pos[0], pos[1], 20, 20))
             s.blit(self.surf, self.rect)
         if self.direction == "up":
-            self.snake[1] -= 10
+            self.snake[1] -= 20
         elif self.direction == "down":
-            self.snake[1] += 10
+            self.snake[1] += 20
         elif self.direction == "left":
-            self.snake[0] -= 10
+            self.snake[0] -= 20
         elif self.direction == "right":
-            self.snake[0] += 10
+            self.snake[0] += 20
 
 
 class Food(pygame.sprite.Sprite):
     def __init__(self):
         super(Food, self).__init__()
-        self.surf = pygame.Surface((10, 10))
+        self.surf = pygame.Surface((20, 20))
         self.surf.fill((255, 0, 50))
         self.rect = self.surf.get_rect()
-        self.pos = [random.randrange(1, (w // 10)) * 10,
-                    random.randrange(1, (h // 10)) * 10]
+        self.pos = [random.randrange(2, (w // 20)) * 20,
+                    random.randrange(2, (h // 20)) * 20]
         self.rect.move_ip(self.pos)
 
 
-w = 400
-h = 400
+w = 800
+h = 600
 s = pygame.display.set_mode((w, h))
 clock = pygame.time.Clock()
 
@@ -76,8 +76,8 @@ while running:
                 player.direction = "left"
     clock.tick(SPEED)
     if spawn_food:
-        food.pos = [random.randrange(1, (w // 10)) * 10,
-                    random.randrange(1, (h // 10)) * 10]
+        food.pos = [random.randrange(2, (w // 20)) * 20,
+                    random.randrange(2, (h // 20)) * 20]
         food.rect.move_ip(-food.pos[0], -food.pos[1])
         food.rect.move_ip(food.pos)
         spawn_food = False
@@ -93,12 +93,12 @@ while running:
     player.control()
     s.blit(food.surf, food.pos)
 
-    if player.snake[0] + 10 <= 0 or player.snake[0] >= w:
+    if player.snake[0] + 20 <= 0 or player.snake[0] >= w:
         running = False
-    if player.snake[1] + 10 <= 0 or player.snake[1] >= h:
+    if player.snake[1] + 20 <= 0 or player.snake[1] >= h:
         running = False
     for square in player.body[1:]:
-        if pygame.Rect(square[0], square[1], 10, 10).colliderect(pygame.Rect(player.snake[0], player.snake[1], 10, 10)):
+        if pygame.Rect(square[0], square[1], 20, 20).colliderect(pygame.Rect(player.snake[0], player.snake[1], 20, 20)):
             running = False
 
     pygame.display.update()
